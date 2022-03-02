@@ -12,7 +12,7 @@ be done in Typescript but Javascript is also okay. The final submission should m
 - Create a simple post reader as a React SPA.
 - Implement above using React components and CSS3.
 - Retrieve the data shown in the app from the API described below.
-- Concentrate on functionality, code quality and testability, not appearance.
+- Concentrate on functionality, code quality (CSS and JS/TS) and testability, not design.
 - Any common state management, routing and/or testing library can be used.
 - Using CSS toolkits and UI frameworks (bootstrap etc) is not ok. The purpose is to evaluate your coding skills, not npm skills.
 
