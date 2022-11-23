@@ -1,0 +1,26 @@
+.root {
+  background: #EDF2F7;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 320px;
+  max-width: 100%;
+  background: #FFF;
+  padding: 12px 16px;
+  border-radius: 5px;
+}
+
+.heading {
+  margin: 0 0 24px;
+  text-align: center;
+}
+
+.formControl {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+}

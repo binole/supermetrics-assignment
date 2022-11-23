@@ -1,7 +1,9 @@
+import { Login } from "./pages/login";
+
 function App() {
   return (
     <div className="App">
-      <h1>Supermetrics Front-end Assignment</h1>
+      <Login />
     </div>
   );
 }
