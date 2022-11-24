@@ -1,18 +1,15 @@
+import { login } from "../../api/auth";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { useForm } from "../../hooks/useForm";
+import { LoginData } from "../../types/auth";
 import styles from "./Login.module.css";
 
-type LoginFormData = {
-  name: string;
-  email: string;
-};
-
 export const Login = () => {
-  const { handleSubmit } = useForm<LoginFormData>();
+  const { handleSubmit } = useForm<LoginData>();
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log(data);
+  const onSubmit = (data: LoginData) => {
+    login(data);
   };
 
   return (
