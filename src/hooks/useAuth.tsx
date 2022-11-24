@@ -7,7 +7,7 @@ import { useLocalStorage } from "./useLocalStorage";
 const TOKEN_KEY = "supermetrics_assignment_token";
 
 type AuthContextType = {
-  token?: string;
+  token: string;
   login: (data: LoginData) => void;
   logout: () => void;
 };

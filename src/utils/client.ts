@@ -2,10 +2,14 @@
 import { API_URL } from '../config';
 
 type RequestConfig = Omit<RequestInit, 'body'> & {
-  body?: Object
+  body?: Object;
+  params?: [string, string][] | { [key: string]: string } | string
 }
 
-export function client(endpoint: string, { body, headers, ...customConfig }: RequestConfig) {
+export function client(endpoint: string, { body, headers, params, ...customConfig }: RequestConfig) {
+  const url = `${API_URL}/assignment/${endpoint}`
+  const fullUrl = params ? url + '?' + new URLSearchParams(params) : url
+
   const config = {
     method: body ? 'POST' : 'GET',
     ...customConfig,
@@ -17,7 +21,7 @@ export function client(endpoint: string, { body, headers, ...customConfig }: Req
   }
 
   return window
-    .fetch(`${API_URL}/assignment/${endpoint}`, config)
+    .fetch(fullUrl, config)
     .then(async response => {
       if (response.ok) {
         return await response.json();
