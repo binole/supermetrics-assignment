@@ -1,5 +1,10 @@
 
 import { API_URL } from '../config';
+import { storage } from './storage';
+
+const statusCodes = {
+  UNAUTHORIZED: 401
+}
 
 type RequestConfig = Omit<RequestInit, 'body'> & {
   body?: Object;
@@ -26,7 +31,12 @@ export function client(endpoint: string, { body, headers, params, ...customConfi
       if (response.ok) {
         return await response.json();
       } else {
+        if (response.status === statusCodes.UNAUTHORIZED) {
+          storage.clearItem('token')
+        }
+
         const errorMessage = await response.text()
+
         return Promise.reject(new Error(errorMessage))
       }
     })
