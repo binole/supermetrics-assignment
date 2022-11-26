@@ -3,8 +3,13 @@ import { Post } from '../types/post';
 import { client } from '../utils/client';
 import { useAuth } from './useAuth';
 
+type Sender = {
+  name: string;
+  posts: Post[];
+}
+
 export const usePosts = () => {
-  const [data, setData] = useState<[string, { name: string, posts: Post[] }][] | null>(null);
+  const [data, setData] = useState<[string, Sender][] | null>(null);
   const { token } = useAuth()
 
   useEffect(() => {
@@ -12,7 +17,7 @@ export const usePosts = () => {
       client("posts", { params: { sl_token: token, page: '1' } }).then(
         (res) => {
           if (res?.data?.posts) {
-            setData(groupPostsBySenders(res.data.posts))
+            setData(sortByName(groupPostsBySenders(res.data.posts)))
           }
         },
       );
@@ -33,4 +38,18 @@ function groupPostsBySenders(posts: Post[]) {
       }
     }
   }, {}))
+}
+
+function sortByName(senders: [string, Sender][]) {
+  return senders.sort(([, currSender], [, nextSender]) => {
+    if (currSender.name < nextSender.name) {
+      return -1
+    }
+
+    if (currSender.name > nextSender.name) {
+      return 1
+    }
+
+    return 0
+  })
 }
