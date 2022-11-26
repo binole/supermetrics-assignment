@@ -4,8 +4,6 @@ import { LoginData } from "../types/auth";
 import { client } from "../utils/client";
 import { useLocalStorage } from "./useLocalStorage";
 
-const TOKEN_KEY = "supermetrics_assignment_token";
-
 type AuthContextType = {
   token: string;
   login: (data: LoginData) => void;
@@ -23,7 +21,7 @@ type AuthProviderProps = {
 };
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [token, setToken] = useLocalStorage<string>(TOKEN_KEY);
+  const [token, setToken] = useLocalStorage<string>("token");
 
   const login = (data: LoginData) => {
     client("register", { body: { client_id: CLIENT_ID, ...data } }).then(
