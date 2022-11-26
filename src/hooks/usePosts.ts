@@ -8,6 +8,11 @@ type Sender = {
   posts: Post[];
 }
 
+const orders = {
+  LATEST: 'LATEST',
+  OLDEST: 'OLDEST'
+}
+
 export const usePosts = () => {
   const [data, setData] = useState<[string, Sender][] | null>(null);
   const { token } = useAuth()
@@ -51,5 +56,15 @@ function sortByName(senders: [string, Sender][]) {
     }
 
     return 0
+  })
+}
+
+export function sortPostsByTime(posts: Post[], order = orders.LATEST) {
+  return posts.sort((a, b) => {
+    if (order === orders.OLDEST) {
+      return new Date(a.created_time).getTime() - new Date(b.created_time).getTime()
+    }
+
+    return new Date(b.created_time).getTime() - new Date(a.created_time).getTime()
   })
 }
