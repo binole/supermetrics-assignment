@@ -11,11 +11,11 @@ export const Posts = () => {
       <button onClick={logout}>Logout</button>
       {postsBySenders?.length ? (
         <ol>
-          {postsBySenders.map(([sender_id, posts]) => (
+          {postsBySenders.map(([sender_id, { name, posts }]) => (
             <li key={sender_id}>
               <details>
                 <summary>
-                  <strong>{sender_id}</strong> ({posts.length})
+                  <strong>{name}</strong> ({posts.length})
                 </summary>
                 <ul>
                   {posts.map(({ id, message, created_time }) => (
