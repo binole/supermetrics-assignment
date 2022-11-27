@@ -33,6 +33,7 @@ export function client(endpoint: string, { body, headers, params, ...customConfi
       } else {
         if (response.status === statusCodes.UNAUTHORIZED) {
           storage.clearItem('token')
+          window.location.replace('/')
         }
 
         const errorMessage = await response.text()
