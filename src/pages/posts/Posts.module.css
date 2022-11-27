@@ -12,7 +12,7 @@ ol, ul {
   margin-right: auto;
 }
 
-.header, .searchBox {
+.searchBox {
   display: flex;
   justify-content: space-between;
   align-items: baseline;

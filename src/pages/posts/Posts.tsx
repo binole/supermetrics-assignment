@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
+import { Header } from "../../components/Header";
 import { Post } from "../../components/Post";
 import { Sender } from "../../components/Sender";
-import { useAuth } from "../../hooks/useAuth";
 import {
   filterSendersByName,
   sortPostsByTime,
@@ -18,7 +18,6 @@ export const Posts = () => {
   const [senderQuery, setSenderQuery] = useState("");
   const [order, setOrder] = useState(orders.LATEST);
   const [postsBySenders] = usePosts();
-  const { logout } = useAuth();
 
   function handleOrderChange(event: ChangeEvent<HTMLSelectElement>) {
     setOrder(event.target.value);
@@ -30,10 +29,7 @@ export const Posts = () => {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <h1>All Posts</h1>
-        <button onClick={logout}>Logout</button>
-      </header>
+      <Header title="All Posts" />
       <div className={styles.searchBox}>
         <input
           type="search"
