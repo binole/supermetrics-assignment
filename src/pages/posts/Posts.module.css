@@ -1,3 +1,8 @@
+ol, ul {
+  list-style: none;
+  padding: 0;
+}
+
 .container {
   width: 100%;
   max-width: 720px;
@@ -7,13 +12,8 @@
   margin-right: auto;
 }
 
-.header {
+.header, .searchBox {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
-
-ol, ul {
-  list-style: none;
-  padding: 0;
 }

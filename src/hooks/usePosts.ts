@@ -68,3 +68,9 @@ export function sortPostsByTime(posts: Post[], order = orders.LATEST) {
     return new Date(b.created_time).getTime() - new Date(a.created_time).getTime()
   })
 }
+
+export function filterSendersByName(senders: [string, Sender][], query: string) {
+  return senders?.filter(([, { name }]) => {
+    return name.match(new RegExp(query, "i"));
+  });
+}
