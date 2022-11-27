@@ -1,6 +1,9 @@
 import { ChangeEvent, useState } from "react";
+import { Post } from "../../components/Post";
+import { Sender } from "../../components/Sender";
 import { useAuth } from "../../hooks/useAuth";
 import { sortPostsByTime, usePosts } from "../../hooks/usePosts";
+import styles from "./Posts.module.css";
 
 const orders = {
   LATEST: "LATEST",
@@ -17,9 +20,11 @@ export const Posts = () => {
   }
 
   return (
-    <div>
-      <h1>Welcome!</h1>
-      <button onClick={logout}>Logout</button>
+    <div className={styles.container}>
+      <header className={styles.header}>
+        <h1>All Posts</h1>
+        <button onClick={logout}>Logout</button>
+      </header>
       <select
         title="Order by"
         onChange={handleOrderChange}
@@ -32,23 +37,17 @@ export const Posts = () => {
         <ol>
           {postsBySenders.map(([sender_id, { name, posts }]) => (
             <li key={sender_id}>
-              <details>
-                <summary>
-                  <strong>{name}</strong> ({posts.length})
-                </summary>
+              <Sender name={name} count={posts.length}>
                 <ul>
                   {sortPostsByTime(posts, order).map(
                     ({ id, message, created_time }) => (
                       <li key={id}>
-                        <small>
-                          <time dateTime={created_time}>{created_time}</time>
-                        </small>
-                        <p>{message}</p>
+                        <Post time={created_time} message={message} />
                       </li>
                     )
                   )}
                 </ul>
-              </details>
+              </Sender>
             </li>
           ))}
         </ol>
